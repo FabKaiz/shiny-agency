@@ -21,6 +21,20 @@ const freelanceProfiles = [
   },
 ]
 
+const StyledH4 = styled.h4`
+  margin: 0;
+  margin-bottom: 76px;
+  font-size: 30px;
+  line-height: 132.5%;
+`
+
+const StyledH5 = styled.h5`
+  margin: 0;
+  margin-bottom: 52px;
+  font-size: 20px;
+  line-height: 132.5%;
+`
+
 const CardsContainer = styled.div`
   display: grid;
   gap: 24px;
@@ -31,7 +45,10 @@ const CardsContainer = styled.div`
 const Freelances = () => {
   return (
     <div className="Freelances">
-      <h1>Freelances 👩‍💻👨‍💻👩‍💻</h1>
+      <StyledH5>
+        Chez Shiny nous réunissons les meilleurs profils pour vous.
+      </StyledH5>
+      <StyledH4>Trouvez votre prestataire</StyledH4>
       <CardsContainer>
         {freelanceProfiles.map((profile, index) => (
           <Card
