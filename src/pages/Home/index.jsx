@@ -18,15 +18,12 @@ const StyledHomeLeft = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
   max-height: 500px;
   max-width: calc(44vw - 139px);
-
-
 `
 
 const StyledHomeRight = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
   max-height: 500px;
   max-width: calc(44vw - 139px);
-
 `
 
 const StyledLink = styledComponents(Link)`
@@ -49,7 +46,9 @@ function Home() {
             Repérez vos besoins, on s’occupe du reste, avec les meilleurs
             talents
           </h1>
-          <StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
+          <StyledLink to="/survey/1" $isFullLink>
+            Faire le test
+          </StyledLink>
         </StyledHomeLeft>
 
         <StyledHomeRight>
