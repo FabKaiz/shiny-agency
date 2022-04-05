@@ -13,6 +13,7 @@ const StyledNav = styled.nav`
 
 const StyledLink = styled(Link)`
   padding: 15px;
+  margin-right: 25px;
   color: white;
   text-decoration: none;
   font-size: 18px;
