@@ -9,6 +9,17 @@ const StyledNav = styled.nav`
   align-items: center;
   padding: 1rem;
   padding-top: 2rem;
+
+  @media (max-width: 688px) {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+`
+
+const HeaderImg = styled.img`
+  @media (max-width: 688px) {
+    display: none;
+  }
 `
 
 const StyledLink = styled(Link)`
@@ -27,7 +38,7 @@ const Header = () => {
   return (
     <StyledNav>
       <div className="nav__logo">
-        <img src={logo} alt="logo" />
+        <HeaderImg src={logo} alt="logo" />
       </div>
       <div className="nav__right">
         <StyledLink to="/">Accueil</StyledLink>
