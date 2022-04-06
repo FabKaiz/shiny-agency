@@ -4,16 +4,13 @@ App created during a OpenClassrooms course about Rooting, API, Hooks, styled com
 
 ## To make that app work :
 
-Clone this repo for the app and  
-Clone this repo to run the local API server : [API repo](https://github.com/OpenClassrooms-Student-Center/7150606-API-React-intermediaire)
+* Clone this repo for the app
+* Clone this repo to run the local API server : [API repo](https://github.com/OpenClassrooms-Student-Center/7150606-API-React-intermediaire)
 
-### `npm start`
+### run `npm install`
+### On the app run `npm start`
 
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ## To make the API work :
 
