@@ -26,7 +26,6 @@ const CardsContainer = styled.div`
   justify-items: center;
   margin-bottom: 76px;
 
-  
   @media (max-width: 738px) {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -35,7 +34,6 @@ const CardsContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
 
-  
   @media (min-width: 1568px) {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -87,15 +85,6 @@ const Freelances = () => {
             />
           ))
         )}
-
-        {/* {freelanceProfiles.map((profile, index) => (
-          <Card
-            key={`${profile.name}-${index}`}
-            label={profile.jobTitle}
-            picture={profile.picture}
-            title={profile.name}
-          />
-        ))} */}
       </CardsContainer>
     </div>
   )
