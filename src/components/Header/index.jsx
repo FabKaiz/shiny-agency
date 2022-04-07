@@ -32,6 +32,11 @@ const StyledLink = styled(Link)`
     props.$isFullLink &&
     `color: white !important; border-radius: 10px; background-color: ${colors.primary};`}
  }
+
+ @media (max-width: 488px) {
+  margin-right: 5px;
+
+ }
 `
 
 const Header = () => {
