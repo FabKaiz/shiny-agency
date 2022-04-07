@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { Loader } from '../../utils/style/Atoms.jsx'
+import { SurveyContext } from '../../utils/context/SurveyProvider'
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -32,6 +33,35 @@ const LinkWrapper = styled.div`
   }
 `
 
+const ReplyBox = styled.button`
+  border: none;
+  height: 100px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.backgroundLight};
+  font-weight: 700;
+  font-size: 25px;
+  color: #2F2E41 !important;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: ${(props) =>
+    props.isSelected ? `0px 0px 0px 2px ${colors.primary} inset` : 'none'};
+  &:first-child {
+    margin-right: 15px;
+  }
+  &:last-of-type {
+    margin-left: 15px;
+  }
+
+`
+
+const ReplyWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
 function Survey() {
   const { questionNumber } = useParams()
   const questionNumberInt = parseInt(questionNumber)
@@ -40,20 +70,14 @@ function Survey() {
   const [surveyData, setSurveyData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   const [error, setError] = useState(null)
+  const { answers, saveAnswers } = useContext(SurveyContext)
 
-  // Cette syntaxe permet aussi bien de faire des calls API.
-  // Mais pour utiliser await dans une fonction, il faut que celle-ci soit async (pour asynchrone).
-  // Comme la fonction passée à useEffect ne peut pas être asynchrone,
-  // il faut utiliser une fonction qui est appelée dans useEffect et déclarée en dehors, comme ici 👇.
-  // Essayez de commenter le code créé dans le chapitre et de décommenter fetchData pour voir.
 
-  // ======= Autre method dans le useEffect =======
-  // fetch(`http://localhost:8000/survey`).then((response) =>
-  //   response.json().then(({ surveyData }) => {
-  //     setSurveyData(surveyData)
-  //     setDataLoading(false)
-  //   })
-  // )
+  
+  function saveReply(answer) {
+    saveAnswers({ [questionNumber]: answer })
+    console.log('save');
+  }
 
   async function fetchData() {
     try {
@@ -78,21 +102,35 @@ function Survey() {
 
   return (
     <SurveyContainer>
-      <QuestionTitle>Question {questionNumber}</QuestionTitle>
-      {isDataLoading ? (
-        <Loader />
+    <QuestionTitle>Question {questionNumber}</QuestionTitle>
+    {isDataLoading ? (
+      <Loader />
+    ) : (
+      <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
+    )}
+    <ReplyWrapper>
+      <ReplyBox
+        onClick={() => saveReply(true)}
+        isSelected={answers[questionNumber] === true}
+      >
+        Oui
+      </ReplyBox>
+      <ReplyBox
+        onClick={() => saveReply(false)}
+        isSelected={answers[questionNumber] === false}
+      >
+        Non
+      </ReplyBox>
+    </ReplyWrapper>
+    <LinkWrapper>
+      <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
+      {surveyData[questionNumberInt + 1] ? (
+        <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
       ) : (
-        <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
+        <Link to="/results">Résultats</Link>
       )}
-      <LinkWrapper>
-        <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-        {surveyData[questionNumberInt + 1] ? (
-          <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
-        ) : (
-          <Link to="/results">Résultats</Link>
-        )}
-      </LinkWrapper>
-    </SurveyContainer>
+    </LinkWrapper>
+  </SurveyContainer>
   )
 }
 
