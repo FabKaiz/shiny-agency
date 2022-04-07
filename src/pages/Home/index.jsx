@@ -6,7 +6,6 @@ import homeLogo from '../../assets/home-illustration.svg'
 
 const StyledHome = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
-  height: calc(100vh - 149px);
   width: calc(100vw - 278px);;
   display: flex;
   justify-content: space-evenly;
@@ -50,7 +49,7 @@ const StyledLink = styledComponents(Link)`
   font-size: 18px;
   ${(props) =>
     props.$isFullLink &&
-    `color: white; border-radius: 10px; background-color: ${colors.primary};`}
+    `color: white !important; border-radius: 10px; background-color: ${colors.primary};`}
  }
 
  @media (max-width: 930px) {

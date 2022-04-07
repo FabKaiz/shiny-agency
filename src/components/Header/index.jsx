@@ -30,7 +30,7 @@ const StyledLink = styled(Link)`
   font-size: 18px;
   ${(props) =>
     props.$isFullLink &&
-    `color: white; border-radius: 10px; background-color: ${colors.primary};`}
+    `color: white !important; border-radius: 10px; background-color: ${colors.primary};`}
  }
 `
 

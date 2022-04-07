@@ -9,19 +9,15 @@ import Header from './components/Header'
 import Error from './components/Error'
 import Freelances from './pages/Freelances'
 import Results from './pages/Results'
-import { createGlobalStyle } from 'styled-components'
-import colors from './utils/style/colors'
+import Footer from './components/Footer'
+import { ThemeProvider } from './utils/context/ThemeProvider'
+import GlobalStyle from './utils/style/GlobalStyle'
 
-const GlobalStyle = createGlobalStyle`
-  div {
-    font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    background-color: ${colors.backgroundDark};
-  }
-`
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ThemeProvider>
       <GlobalStyle />
       <Header />
       <Routes>
@@ -31,6 +27,8 @@ ReactDOM.render(
         <Route path="/results" element={<Results />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
+    </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
