@@ -40,7 +40,7 @@ const ReplyBox = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${colors.backgroundLight};
+  background-color: #d9d9e3;
   font-weight: 700;
   font-size: 25px;
   color: #2F2E41 !important;
