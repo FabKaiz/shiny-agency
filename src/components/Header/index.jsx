@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
-import logo from '../../assets/light-logo.png'
+import logoDark from '../../assets/light-logo.png'
+import logoLight from '../../assets/dark-logo.png'
+import { ThemeContext } from '../../utils/context/ThemeProvider'
+import { useContext } from 'react'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -40,10 +43,17 @@ const StyledLink = styled(Link)`
 `
 
 const Header = () => {
+  const { theme } = useContext(ThemeContext)
+
   return (
     <StyledNav>
       <div className="nav__logo">
-        <HeaderImg src={logo} alt="logo" />
+        {theme === 'dark' ? (
+          <HeaderImg src={logoDark} alt="logo" />
+
+        ) : (
+          <HeaderImg src={logoLight} alt="logo" />
+        )}
       </div>
       <div className="nav__right">
         <StyledLink to="/">Accueil</StyledLink>

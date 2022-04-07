@@ -2,7 +2,6 @@
   "extends": [
     "react-app"
   ],
-  "parser": "babel-eslint",
   "rules": {
     // "no-console":"error"
   }
