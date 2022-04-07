@@ -6,7 +6,7 @@ import homeLogo from '../../assets/home-illustration.svg'
 
 const StyledHome = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
-  width: calc(100vw - 278px);;
+  width: calc(100vw - 278px);
   display: flex;
   justify-content: space-evenly;
   padding: 139px 77px;

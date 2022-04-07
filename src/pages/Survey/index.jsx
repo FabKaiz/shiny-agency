@@ -9,7 +9,7 @@ const SurveyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 149px);
+  height: calc(100vh - 289px);
   color: #fff;
 `
 
