@@ -34,12 +34,11 @@ const StyledLink = styled(Link)`
   ${(props) =>
     props.$isFullLink &&
     `color: white !important; border-radius: 10px; background-color: ${colors.primary};`}
- }
+  }
 
- @media (max-width: 488px) {
-  margin-right: 5px;
-
- }
+  @media (max-width: 488px) {
+    margin-right: 5px;
+  }
 `
 
 const Header = () => {
@@ -50,7 +49,6 @@ const Header = () => {
       <div className="nav__logo">
         {theme === 'dark' ? (
           <HeaderImg src={logoDark} alt="logo" />
-
         ) : (
           <HeaderImg src={logoLight} alt="logo" />
         )}
