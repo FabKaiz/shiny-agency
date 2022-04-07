@@ -20,7 +20,6 @@ const StyledHome = styledComponents.div`
 
 const StyledHomeLeft = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
-  max-height: 500px;
   max-width: calc(44vw - 139px);
 
   @media (max-width: 930px) {
@@ -30,7 +29,6 @@ const StyledHomeLeft = styledComponents.div`
 
 const StyledHomeRight = styledComponents.div`
   background-color: ${colors.backgroundDarkSecondary};
-  max-height: 500px;
   max-width: calc(44vw - 139px);
 
   @media (max-width: 930px) {
