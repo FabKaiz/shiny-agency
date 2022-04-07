@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Survey from './pages/Survey'
 import Header from './components/Header'
@@ -11,25 +10,39 @@ import Freelances from './pages/Freelances'
 import Results from './pages/Results'
 import Footer from './components/Footer'
 import { ThemeProvider } from './utils/context/ThemeProvider'
+
 import GlobalStyle from './utils/style/GlobalStyle'
+import { SurveyProvider } from './utils/context/SurveyProvider'
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <ThemeProvider>
-      <GlobalStyle />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/survey/:questionNumber" element={<Survey />} />
-        <Route path="/freelances" element={<Freelances />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer />
-    </ThemeProvider>
-    </BrowserRouter>
+    <Router>
+      <ThemeProvider>
+        <SurveyProvider>
+          <GlobalStyle />
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/survey/:questionNumber">
+              <Survey />
+            </Route>
+            <Route path="/results">
+              <Results />
+            </Route>
+            <Route path="/freelances">
+              <Freelances />
+            </Route>
+            <Route>
+              <Error />
+            </Route>
+          </Switch>
+          <Footer />
+        </SurveyProvider>
+      </ThemeProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 )

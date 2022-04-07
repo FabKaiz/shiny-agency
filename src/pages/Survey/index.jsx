@@ -76,7 +76,6 @@ function Survey() {
   
   function saveReply(answer) {
     saveAnswers({ [questionNumber]: answer })
-    console.log('save');
   }
 
   async function fetchData() {
