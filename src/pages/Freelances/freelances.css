@@ -1,5 +1,4 @@
 .Freelances {
-  min-height: calc(100vh - 149px);
   display: flex;
   flex-direction: column;
   align-items: center;
