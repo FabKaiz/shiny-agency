@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { Loader } from '../../utils/style/Atoms.jsx'
 import { SurveyContext } from '../../utils/context/SurveyProvider'
+import { useFetch } from '../../utils/hooks'
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ const ReplyBox = styled.button`
   background-color: #d9d9e3;
   font-weight: 700;
   font-size: 25px;
-  color: #2F2E41 !important;
+  color: #2f2e41 !important;
   border-radius: 30px;
   cursor: pointer;
   box-shadow: ${(props) =>
@@ -54,7 +55,6 @@ const ReplyBox = styled.button`
   &:last-of-type {
     margin-left: 15px;
   }
-
 `
 
 const ReplyWrapper = styled.div`
@@ -67,69 +67,64 @@ function Survey() {
   const questionNumberInt = parseInt(questionNumber)
   const prevQuestionNumber = questionNumberInt === 1 ? 1 : questionNumberInt - 1
   const nextQuestionNumber = questionNumberInt + 1
-  const [surveyData, setSurveyData] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  const [error, setError] = useState(null)
   const { answers, saveAnswers } = useContext(SurveyContext)
 
+  const { data, isLoading, error } = useFetch(`http://localhost:8000/survey`)
+  const { surveyData } = data
 
-  
   function saveReply(answer) {
     saveAnswers({ [questionNumber]: answer })
   }
 
-  async function fetchData() {
-    try {
-      const response = await fetch(`http://localhost:8000/survey`)
-      const { surveyData } = await response.json()
-      setSurveyData(surveyData)
-      setDataLoading(false)
-    } catch (error) {
-      console.log('===== error =====', error)
-      setError(true)
-    }
-  }
-
-  useEffect(() => {
-    setDataLoading(true)
-    fetchData()
-  }, [])
-
   if (error) {
-    return <span>Oups il y a eu un problème</span>
+    return (
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '2rem',
+          fontSize: '2rem',
+        }}
+      >
+        Oups il y a eu un problème
+      </span>
+    )
   }
 
   return (
     <SurveyContainer>
-    <QuestionTitle>Question {questionNumber}</QuestionTitle>
-    {isDataLoading ? (
-      <Loader />
-    ) : (
-      <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
-    )}
-    <ReplyWrapper>
-      <ReplyBox
-        onClick={() => saveReply(true)}
-        isSelected={answers[questionNumber] === true}
-      >
-        Oui
-      </ReplyBox>
-      <ReplyBox
-        onClick={() => saveReply(false)}
-        isSelected={answers[questionNumber] === false}
-      >
-        Non
-      </ReplyBox>
-    </ReplyWrapper>
-    <LinkWrapper>
-      <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-      {surveyData[questionNumberInt + 1] ? (
-        <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
+      <QuestionTitle>Question {questionNumber}</QuestionTitle>
+      {isLoading ? (
+        <Loader />
       ) : (
-        <Link to="/results">Résultats</Link>
+        <QuestionContent>
+          {surveyData && surveyData[questionNumber]}
+        </QuestionContent>
       )}
-    </LinkWrapper>
-  </SurveyContainer>
+      <ReplyWrapper>
+        <ReplyBox
+          onClick={() => saveReply(true)}
+          isSelected={answers[questionNumber] === true}
+        >
+          Oui
+        </ReplyBox>
+        <ReplyBox
+          onClick={() => saveReply(false)}
+          isSelected={answers[questionNumber] === false}
+        >
+          Non
+        </ReplyBox>
+      </ReplyWrapper>
+      <LinkWrapper>
+        <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
+        {surveyData && surveyData[questionNumberInt + 1] ? (
+          <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
+        ) : (
+          <Link to="/results">Résultats</Link>
+        )}
+      </LinkWrapper>
+    </SurveyContainer>
   )
 }
 
