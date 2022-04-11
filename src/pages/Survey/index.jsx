@@ -48,7 +48,7 @@ const ReplyBox = styled.button`
   border-radius: 30px;
   cursor: pointer;
   box-shadow: ${(props) =>
-    props.isSelected ? `0px 0px 0px 2px ${colors.primary} inset` : 'none'};
+    props.isSelected ? `0px 0px 0px 2px inset ${colors.primary}` : 'none'};
   &:first-child {
     margin-right: 15px;
   }
