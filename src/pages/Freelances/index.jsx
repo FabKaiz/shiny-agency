@@ -1,8 +1,8 @@
 import Card from '../../components/Card'
 import './freelances.css'
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
 import { Loader } from '../../utils/style/Atoms'
+import { useFetch } from '../../utils/hooks'
 
 const StyledH4 = styled.h4`
   margin: 0;
@@ -40,30 +40,26 @@ const CardsContainer = styled.div`
 `
 
 const Freelances = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [profilData, setProfilData] = useState([])
-  const [error, setError] = useState(false)
+  const { data, isLoading, error } = useFetch(
+    `http://localhost:8000/freelances`
+  )
 
-  async function fetchProfilData() {
-    setIsLoading(true)
-    try {
-      const response = await fetch(`http://localhost:8000/freelances`)
-      const { freelancersList } = await response.json()
-      setProfilData(freelancersList)
-    } catch (error) {
-      console.log('===== error =====', error)
-      setError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchProfilData()
-  }, [])
+  const profilData = data?.freelancersList
 
   if (error) {
-    return <span>Oups il y a eu un problème</span>
+    return (
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '2rem',
+          fontSize: '2rem',
+        }}
+      >
+        Oups il y a eu un problème
+      </span>
+    )
   }
 
   return (

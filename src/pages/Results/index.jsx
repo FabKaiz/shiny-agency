@@ -89,7 +89,19 @@ function Results() {
   )
 
   if (error) {
-    return <span>Il y a un problème</span>
+    return (
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '2rem',
+          fontSize: '2rem',
+        }}
+      >
+        Oups il y a eu un problème
+      </span>
+    )
   }
 
   const resultsData = data?.resultsData
