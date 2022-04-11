@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import logoDark from '../../assets/light-logo.png'
 import logoLight from '../../assets/dark-logo.png'
-import { ThemeContext } from '../../utils/context/ThemeProvider'
-import { useContext } from 'react'
+import { useTheme } from '../../utils/hooks'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -42,7 +41,7 @@ const StyledLink = styled(Link)`
 `
 
 const Header = () => {
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useTheme()
 
   return (
     <StyledNav>
