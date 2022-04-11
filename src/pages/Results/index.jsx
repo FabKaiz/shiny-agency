@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import { SurveyContext } from '../../utils/context/SurveyProvider'
-import { useFetch } from '../../utils/hooks'
+import { useFetch, useTheme } from '../../utils/hooks'
 import { StyledLink, Loader } from '../../utils/style/Atoms'
-import { ThemeContext } from '../../utils/context/ThemeProvider'
 import colors from '../../utils/style/colors'
 import styled from 'styled-components'
 
@@ -80,7 +79,7 @@ function formatFetchParams(answers) {
 }
 
 function Results() {
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useTheme()
   const { answers } = useContext(SurveyContext)
   const fetchParams = formatFetchParams(answers)
 
