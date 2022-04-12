@@ -75,7 +75,7 @@ export function formatJobList(title, listLength, index) {
   return `${title},`
 }
 
-function formatQueryParams(answers) {
+export function formatQueryParams(answers) {
   const answerNumbers = Object.keys(answers)
 
   return answerNumbers.reduce((previousParams, answerNumber, index) => {
@@ -88,7 +88,9 @@ function formatQueryParams(answers) {
 function Results() {
   const { theme } = useTheme()
   const { answers } = useContext(SurveyContext)
+  console.log(answers);
   const fetchParams = formatQueryParams(answers)
+  console.log('fetched', fetchParams);
 
   const { data, isLoading, error } = useFetch(
     `http://localhost:8000/results?${fetchParams}`
