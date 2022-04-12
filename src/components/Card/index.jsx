@@ -67,7 +67,6 @@ const Card = ({ label, title, picture }) => {
   const { theme } = useTheme()
   const [isFavorite, setIsFavorite] = useState(false)
   const star = isFavorite ? '⭐️' : ''
-  console.log(theme)
 
   return (
     <CardWrapper theme={theme} onClick={() => setIsFavorite(!isFavorite)}>
