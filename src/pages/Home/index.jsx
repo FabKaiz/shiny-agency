@@ -59,10 +59,6 @@ const StyledLink = styledComponents(Link)`
 
 }
 `
-// For jest testing purposes
-export function sum(a, b) {
-  return a + b
-}
 
 function Home() {
   return (
