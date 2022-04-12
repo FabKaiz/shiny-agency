@@ -1,19 +1,20 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { render, waitFor, screen } from '@testing-library/react'
+import { waitFor, screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { render } from '../../utils/test'
 
 import Freelances from './'
 
 const freelancersMockedData = [
   {
-      name: 'Harry Potter',
-      job: 'Magicien frontend',
-      picture: '',
+    name: 'Harry Potter',
+    job: 'Magicien frontend',
+    picture: '',
   },
   {
-      name: 'Hermione Granger',
-      job: 'Magicienne fullstack',
-      picture: '',
+    name: 'Hermione Granger',
+    job: 'Magicienne fullstack',
+    picture: '',
   },
 ]
 
@@ -24,6 +25,16 @@ const server = setupServer(
     return res(ctx.json({ freelancersList: freelancersMockedData }))
   })
 )
+
+test('Should render without crash', async () => {
+  render(<Freelances />)
+
+  await waitForElementToBeRemoved(() => screen.getByTestId('loader'))
+  await waitFor(() => {
+    expect(screen.getByText('Harry Potter')).toBeTruthy()
+    expect(screen.getByText('Hermione Granger')).toBeTruthy()
+  })
+})
 
 // Active la simulation d'API avant les tests depuis server
 beforeAll(() => server.listen())

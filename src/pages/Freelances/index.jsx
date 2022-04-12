@@ -70,7 +70,7 @@ const Freelances = () => {
       <StyledH4>Trouvez votre prestataire</StyledH4>
       <CardsContainer>
         {isLoading ? (
-          <Loader />
+          <Loader data-testid="loader" />
         ) : (
           profilData.map((profile) => (
             <Card
