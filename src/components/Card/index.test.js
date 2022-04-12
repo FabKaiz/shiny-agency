@@ -1,17 +1,15 @@
 import Card from './'
-import { render, screen, fireEvent } from '@testing-library/react'
-import { ThemeProvider } from '../../utils/context/ThemeProvider'
+import { screen, fireEvent } from '@testing-library/react'
+import { render } from '../../utils/test'
 
 describe('Card', () => {
   test('Should render title and image', async () => {
     render(
-      <ThemeProvider>
-        <Card
-          title="Harry Potter"
-          label="Magicien frontend"
-          picture="/myPicture.png"
-        />
-      </ThemeProvider>
+      <Card
+        title="Harry Potter"
+        label="Magicien frontend"
+        picture="/myPicture.png"
+      />
     )
     const cardPicture = screen.getByRole('img')
     const cardTitle = screen.getByText(/Harry/i)
@@ -20,13 +18,11 @@ describe('Card', () => {
   })
   test('Should add ⭐️ around title', async () => {
     render(
-      <ThemeProvider>
-        <Card
-          title="Harry Potter"
-          label="Magicien frontend"
-          picture="/myPicture.png"
-        />
-      </ThemeProvider>
+      <Card
+        title="Harry Potter"
+        label="Magicien frontend"
+        picture="/myPicture.png"
+      />
     )
     const cardTitle = screen.getByText(/Harry/i)
     const parentNode = cardTitle.closest('div')

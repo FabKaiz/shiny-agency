@@ -1,22 +1,15 @@
-import { MemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import Home from './'
-import { ThemeProvider } from '../../utils/context/ThemeProvider'
+import { render } from '../../utils/test'
 
 describe('The Home component', () => {
   it('should render the home without crash', () => {
-    render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <Home />
-        </ThemeProvider>
-      </MemoryRouter>
-    )
+    render(<Home />)
     expect(
       screen.getByRole('heading', {
         level: 1,
         text:
-          'Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents'
+          'Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents',
       })
     ).toBeTruthy()
   })
