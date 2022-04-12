@@ -12,5 +12,12 @@ describe('The Home component', () => {
         </ThemeProvider>
       </MemoryRouter>
     )
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        text:
+          'Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents'
+      })
+    ).toBeTruthy()
   })
 })
