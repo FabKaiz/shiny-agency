@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { useTheme } from '../../utils/hooks'
 
-
 const FooterContainer = styled.footer`
   display: flex;
   flex-direction: row;
@@ -22,11 +21,11 @@ function Footer() {
   const { toggleTheme, theme } = useTheme()
 
   return (
-      <FooterContainer>
+    <FooterContainer>
       <NightModeButton onClick={() => toggleTheme()}>
-          Changer de mode : {theme === 'light' ? '🌙' : '☀️' }
+        Changer de mode : {theme === 'light' ? '🌙' : '☀️'}
       </NightModeButton>
-      </FooterContainer>
+    </FooterContainer>
   )
 }
 
