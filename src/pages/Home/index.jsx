@@ -60,10 +60,15 @@ const StyledLink = styledComponents(Link)`
 }
 `
 
+export function sum(a, b) {
+  return a + b
+}
+
 function Home() {
   return (
     <div className="Home">
       <StyledHome>
+        {sum(40,2)}
         <StyledHomeLeft>
           <h1>
             Repérez vos besoins, on s’occupe du reste, avec les meilleurs
