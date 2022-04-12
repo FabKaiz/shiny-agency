@@ -88,9 +88,7 @@ export function formatQueryParams(answers) {
 function Results() {
   const { theme } = useTheme()
   const { answers } = useContext(SurveyContext)
-  console.log(answers);
   const fetchParams = formatQueryParams(answers)
-  console.log('fetched', fetchParams);
 
   const { data, isLoading, error } = useFetch(
     `http://localhost:8000/results?${fetchParams}`
