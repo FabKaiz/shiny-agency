@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
+import DefaultPicture from '../../assets/profile.png'
 
 const CardLabel = styled.span`
   color: #fff;
@@ -63,14 +64,17 @@ const Card = ({ label, title, picture }) => {
   )
 }
 
+
 Card.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  picture: PropTypes.string,
+  picture: PropTypes.string.isRequired,
 }
 
 Card.defaultProps = {
-  title: 'Mon titre par défaut',
+  label: '',
+  title: '',
+  picture: DefaultPicture,
 }
 
 export default Card
