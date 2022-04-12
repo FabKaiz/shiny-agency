@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { useTheme } from '../hooks'
+import colors from './colors'
 
 export const StyledGlobalStyle = createGlobalStyle`
   * {
@@ -15,7 +16,7 @@ export const StyledGlobalStyle = createGlobalStyle`
 
   div {
     background-color: ${({ isDarkMode }) =>
-      isDarkMode ? '#2F2E41' : 'white !important'};
+      isDarkMode ? '#2F2E41' : `${ colors.bgTest}`};
   }
 `
 
