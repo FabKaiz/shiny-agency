@@ -16,13 +16,17 @@ export function useFetch(url) {
       try {
         const response = await fetch(url)
 
-        const data = await response.json()
+        if (!response.ok) {
+          const { errorMessage } = await response.json()
+          throw new Error(errorMessage)
+        } else {
+          const data = await response.json()
+          setData(data)
+        }
 
-        setData(data)
       } catch (err) {
-        console.log(err)
+        setError(err.message)
 
-        setError(true)
       } finally {
         setLoading(false)
       }
@@ -38,4 +42,3 @@ export function useTheme() {
   const { theme, toggleTheme } = useContext(ThemeContext)
   return { theme, toggleTheme }
 }
-

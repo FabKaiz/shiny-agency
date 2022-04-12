@@ -53,11 +53,14 @@ const Freelances = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          textAlign: 'center',
           marginTop: '2rem',
           fontSize: '2rem',
         }}
+        data-testid="error"
       >
-        Oups il y a eu un problème
+        Oups il y a eu un problème: <br />
+        {error}
       </span>
     )
   }
