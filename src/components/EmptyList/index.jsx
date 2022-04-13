@@ -9,7 +9,7 @@ const Container = styled.div`
   margin: 60px 90px;
   padding: 30px;
   background-color: ${({ theme }) =>
-    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    theme === 'light' ? colors.backgroundLight : colors.backgroundDarkSecondary};
 `
 
 const Title = styled.h1`
