@@ -3,6 +3,7 @@ import './freelances.css'
 import styled from 'styled-components'
 import { Loader } from '../../utils/style/Atoms'
 import { useFetch } from '../../utils/hooks'
+import { Link } from 'react-router-dom'
 
 const StyledH4 = styled.h4`
   margin: 0;
@@ -37,6 +38,10 @@ const CardsContainer = styled.div`
   @media (min-width: 1568px) {
     grid-template-columns: repeat(4, 1fr);
   }
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `
 
 const Freelances = () => {
@@ -76,12 +81,14 @@ const Freelances = () => {
           <Loader data-testid="loader" />
         ) : (
           profilData.map((profile) => (
-            <Card
-              key={`${profile.name}-${profile.id}`}
-              label={profile.job}
-              picture={profile.picture}
-              title={profile.name}
-            />
+            <StyledLink key={`freelance-${profile.id}`} to={`/profile/${profile.id}`}>
+              <Card
+                key={`${profile.name}-${profile.id}`}
+                label={profile.job}
+                picture={profile.picture}
+                title={profile.name}
+              />
+            </StyledLink>
           ))
         )}
       </CardsContainer>
