@@ -9,12 +9,11 @@ import Error from './components/Error'
 import Freelances from './pages/Freelances'
 import Results from './pages/Results'
 import Footer from './components/Footer'
-import Profile from './components/Profile'
+import Profile from './pages/Profile'
 import { ThemeProvider } from './utils/context/ThemeProvider'
 
 import GlobalStyle from './utils/style/GlobalStyle'
 import { SurveyProvider } from './utils/context/SurveyProvider'
-
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,9 +35,10 @@ ReactDOM.render(
             <Route path="/freelances">
               <Freelances />
             </Route>
-            <Route path="/profile/:id">
-              <Profile />
-            </Route>
+            <Route
+              path="/profile/:id"
+              render={(props) => <Profile {...props} />}
+            />
             <Route>
               <Error />
             </Route>
