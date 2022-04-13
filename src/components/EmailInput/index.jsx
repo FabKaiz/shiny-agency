@@ -25,10 +25,10 @@ const StyledInput = styled.input`
   margin-top: 5px;
   margin-bottom: 15px;
 `
+
+// OLD REACT SYNTAX
 class EmailInput extends Component {
   constructor(props) {
-    // L'autre manière de binder de manière explicite votre fonction au this
-    // this.updateInputValue =this.updateInputValue.bind(this)
     super(props)
     this.state = {
       inputValue: '',
