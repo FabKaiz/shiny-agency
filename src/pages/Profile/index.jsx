@@ -11,7 +11,9 @@ const ProfileWrapper = styled.div`
   padding: 90px 0;
   margin: 0 90px;
   background-color: ${({ theme }) =>
-    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
 `
 
 const ProfileDetails = styled.div`
@@ -19,6 +21,10 @@ const ProfileDetails = styled.div`
   flex-direction: column;
   margin-left: 50px;
   color: ${({ theme }) => (theme === 'light' ? colors.dark : 'white')};
+  background-color: ${({ theme }) =>
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
 `
 
 const Picture = styled.img`
@@ -28,39 +34,60 @@ const Picture = styled.img`
 `
 
 const Title = styled.h1`
-  font-size: 25px;
   margin: 0;
-  font-weight: 500;
+  background-color: ${({ theme }) =>
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
+  font-size: 31px;
+  line-height: 36px;
 `
 
 const JobTitle = styled.h2`
   padding-top: 10px;
-  font-size: 20px;
   margin: 0;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 29px;
 `
 
 const Location = styled.span`
   margin-left: 15px;
-  color: ${colors.secondary};
+  color: ${({ theme }) =>
+    theme === 'light' ? colors.secondary : 'white'};
+  background-color: ${({ theme }) =>
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
+  font-size: 18px;
+  line-height: 21px;
 `
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: ${({ theme }) =>
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
 `
 
 const Price = styled.span`
   padding-top: 10px;
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 31px;
+  line-height: 36px;
 `
 
 const SkillsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px 0;
+  background-color: ${({ theme }) =>
+    theme === 'light'
+      ? colors.backgroundLight
+      : colors.backgroundDarkSecondary};
 `
 
 const Skill = styled.span`
@@ -119,20 +146,32 @@ class Profile extends Component {
     } = profileData
 
     return (
-      <div>
-        <img src={picture} alt={name} height={150} width={150} />
-        <h1>{name}</h1>
-        <span>{location}</span>
-        <h2>{job}</h2>
-        <div>
-          {skills &&
-            skills.map((skill) => (
-              <div key={`skill-${skill}-${id}`}>{skill}</div>
-            ))}
-        </div>
-        <div>{available ? 'Disponible maintenant' : 'Indisponible'}</div>
-        <span>{tjm} € / jour</span>
-      </div>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <ProfileWrapper theme={theme}>
+            <Picture src={picture} alt={name} height={150} width={150} />
+            <ProfileDetails theme={theme}>
+              <TitleWrapper theme={theme}>
+                <Title theme={theme}>{name}</Title>
+                <Location theme={theme}>{location}</Location>
+              </TitleWrapper>
+              <JobTitle>{job}</JobTitle>
+              <SkillsWrapper theme={theme}>
+                {skills &&
+                  skills.map((skill) => (
+                    <Skill key={`skill-${skill}-${id}`} theme={theme}>
+                      {skill}
+                    </Skill>
+                  ))}
+              </SkillsWrapper>
+              <Availability available={available}>
+                {available ? 'Disponible maintenant' : 'Indisponible'}
+              </Availability>
+              <Price>{tjm} € / jour</Price>
+            </ProfileDetails>
+          </ProfileWrapper>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }
