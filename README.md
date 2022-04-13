@@ -1,6 +1,15 @@
 # OpenClassrooms - React intermédiaire
 
-App created during a OpenClassrooms course about Rooting, API, Hooks, styled components and more..
+App created during a OpenClassrooms course.  
+What I learned in this course:
+* Work with a formated code with ESLint and Prettier
+* React Router v5 / v6
+* Styled Components
+* Use API with React and async functions
+* Hooks (useContext, useEffect, useState and my own hooks)
+* Testing with Jest and React testing lybrary
+* Old React syntax (no hooks, components made with Class)
+* PropTypes
 
 ## To make that app work :
 
