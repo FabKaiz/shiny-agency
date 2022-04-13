@@ -27,7 +27,7 @@ const HeaderImg = styled.img`
 const StyledLink = styled(Link)`
   padding: 15px;
   margin-right: 25px;
-  color: white;
+  color: ${({ theme }) => (theme === 'light' ? colors.secondary : 'white')};
   text-decoration: none;
   font-size: 18px;
   ${(props) =>
@@ -53,8 +53,12 @@ const Header = () => {
         )}
       </div>
       <div className="nav__right">
-        <StyledLink to="/">Accueil</StyledLink>
-        <StyledLink to="/freelances">Profils</StyledLink>
+        <StyledLink theme={theme} to="/">
+          Accueil
+        </StyledLink>
+        <StyledLink theme={theme} to="/freelances">
+          Profils
+        </StyledLink>
         <StyledLink to="/survey/1" $isFullLink>
           Faire le test
         </StyledLink>
