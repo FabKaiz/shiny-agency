@@ -2,6 +2,9 @@ import { Component } from 'react'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { ThemeContext } from '../../utils/context/ThemeProvider'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Loader } from '../../utils/style/Atoms'
 
 const ProfileWrapper = styled.div`
   display: flex;
@@ -53,8 +56,7 @@ const JobTitle = styled.h2`
 
 const Location = styled.span`
   margin-left: 15px;
-  color: ${({ theme }) =>
-    theme === 'light' ? colors.secondary : 'white'};
+  color: ${({ theme }) => (theme === 'light' ? colors.secondary : 'white')};
   background-color: ${({ theme }) =>
     theme === 'light'
       ? colors.backgroundLight
@@ -113,67 +115,68 @@ const Availability = styled.span`
   position: relative;
 `
 
-class Profile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      profileData: {},
-    }
-  }
+function Profile() {
+  const { id: queryId } = useParams()
+  const [profileData, setProfileData] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
-  componentDidMount() {
-    const { id } = this.props.match.params
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:8000/freelance?id=${id}`)
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(
+        `http://localhost:8000/freelance?id=${queryId}`
+      )
       const jsonResponse = await response.json()
-      if (jsonResponse && jsonResponse.freelanceData) {
-        this.setState({ profileData: jsonResponse?.freelanceData })
-      }
+      setProfileData(jsonResponse?.freelanceData)
+      setIsLoading(false)
     }
     fetchData()
-  }
-  render() {
-    const { profileData } = this.state
-    const {
-      picture,
-      name,
-      location,
-      tjm,
-      job,
-      skills,
-      available,
-      id,
-    } = profileData
+  }, [queryId])
 
-    return (
-      <ThemeContext.Consumer>
-        {({ theme }) => (
-          <ProfileWrapper theme={theme}>
-            <Picture src={picture} alt={name} height={150} width={150} />
-            <ProfileDetails theme={theme}>
-              <TitleWrapper theme={theme}>
-                <Title theme={theme}>{name}</Title>
-                <Location theme={theme}>{location}</Location>
-              </TitleWrapper>
-              <JobTitle>{job}</JobTitle>
-              <SkillsWrapper theme={theme}>
-                {skills &&
-                  skills.map((skill) => (
-                    <Skill key={`skill-${skill}-${id}`} theme={theme}>
-                      {skill}
-                    </Skill>
-                  ))}
-              </SkillsWrapper>
-              <Availability available={available}>
-                {available ? 'Disponible maintenant' : 'Indisponible'}
-              </Availability>
-              <Price>{tjm} € / jour</Price>
-            </ProfileDetails>
-          </ProfileWrapper>
-        )}
-      </ThemeContext.Consumer>
-    )
-  }
+  const {
+    picture,
+    name,
+    location,
+    tjm,
+    job,
+    skills,
+    available,
+    id,
+  } = profileData
+
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <ProfileWrapper theme={theme}>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <Picture src={picture} alt={name} height={150} width={150} />
+              <ProfileDetails theme={theme}>
+                <TitleWrapper theme={theme}>
+                  <Title theme={theme}>{name}</Title>
+                  <Location theme={theme}>{location}</Location>
+                </TitleWrapper>
+                <JobTitle>{job}</JobTitle>
+                <SkillsWrapper theme={theme}>
+                  {skills &&
+                    skills.map((skill) => (
+                      <Skill key={`skill-${skill}-${id}`} theme={theme}>
+                        {skill}
+                      </Skill>
+                    ))}
+                </SkillsWrapper>
+                <Availability available={available}>
+                  {available ? 'Disponible maintenant' : 'Indisponible'}
+                </Availability>
+                <Price>{tjm} € / jour</Price>
+              </ProfileDetails>
+            </>
+          )}
+        </ProfileWrapper>
+      )}
+    </ThemeContext.Consumer>
+  )
 }
 
 export default Profile
