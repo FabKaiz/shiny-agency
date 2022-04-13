@@ -41,7 +41,6 @@ class EmailInput extends Component {
 
   render() {
     const { theme } = this.props
-    console.log(theme);
 
     return (
       <InputWrapper theme={theme}>
