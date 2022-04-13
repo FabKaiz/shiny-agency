@@ -10,7 +10,7 @@ What I learned in this course:
 * Testing with Jest and React testing lybrary
 * Old React syntax (no hooks, components made with Class)
 * PropTypes
-
+### Check out the [Figma design](https://www.figma.com/file/KlrToaA7Dj1Sm0opq37ICg/React-interm%C3%A9diaire?node-id=0%3A1)
 ## To make that app work :
 
 * Clone this repo for the app
